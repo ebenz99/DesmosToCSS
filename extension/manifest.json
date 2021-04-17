@@ -11,5 +11,9 @@
     },
     "permissions": [
      "activeTab"
-     ]
+     ],
+     "content_scripts": [{
+        "matches": ["*://*.desmos.com/calculator/*"],
+        "js": ["math.js","contentScript.js"]
+      }]
   }
