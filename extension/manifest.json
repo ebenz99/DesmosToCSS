@@ -12,6 +12,10 @@
     "permissions": [
      "activeTab"
      ],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": true
+    },
      "content_scripts": [{
         "matches": ["*://*.desmos.com/calculator/*"],
         "js": ["math.js","contentScript.js"]

@@ -79,9 +79,7 @@ const interpretParens = (elementStr,flag) => {
         }
         else {
             // console.log(items[itemIdx].innerText)
-            if (items[itemIdx].textContent != "&nbsp;"){
-                currStr += items[itemIdx].textContent;
-            }
+            currStr += items[itemIdx].textContent;
             itemIdx += 1;
         }
     }
@@ -95,14 +93,13 @@ const xpath = '//*[contains(concat( " ", @class, " " ), concat( " ", "dcg-mq-roo
 var results = document.evaluate(xpath, document, null, XPathResult.ANY_TYPE, null);
 while (node = results.iterateNext()) {
     elements.push(node)
-    // console.log(node);
 }
 
 elements = elements.slice(0,NUM_EQUATIONS);
 
-elements.map((equation) => {
+let equations = elements.map((equation) => {
     let equationElements = Array.from(equation.children);
-    equationString = [equationElements.map((equationItem) => { 
+    equationList = equationElements.map((equationItem) => { 
         if (equationItem.innerHTML.includes(OPEN_PAREN_CLASS)) {
             return interpretParens(equationItem.innerHTML, false)
         }
@@ -112,10 +109,20 @@ elements.map((equation) => {
         else {
             return equationItem.innerHTML
         }
-    })]
-    console.log(equationString)
+    })
+    return equationList.filter(x => x!="&nbsp;").join('').trim();
 });
 
+
+equationsDict = equations.reduce((map, equation) => {
+    map[equation[0]] = equation;
+    return map;
+}, {});
+
+// alert(Object.keys(equationsDict))
+
+
+chrome.runtime.sendMessage({cmd: "addEquations", equations: JSON.stringify(equationsDict)});
 
 // alert(elements[0].children)
 
