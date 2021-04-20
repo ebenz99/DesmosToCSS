@@ -13,11 +13,11 @@
      "activeTab"
      ],
     "background": {
-        "scripts": ["background.js"],
+        "scripts": ["math.js","background.js"],
         "persistent": true
     },
      "content_scripts": [{
         "matches": ["*://*.desmos.com/calculator/*"],
-        "js": ["math.js","contentScript.js"]
+        "js": ["contentScript.js"]
       }]
   }
