@@ -5,12 +5,9 @@ if (chrome.storage.local.get('DesmosToCSSVals', (val) => {
     if (val['DesmosToCSSVals'] == 'true') {
         params.map((param) => {
             if (param != 'name') {
-                    let cachedVal;
-                    chrome.storage.local.get(`DesmosToCSS${param}`, (pair) => {
-                    alert(`${pair[`DesmosToCSS${param}`]} and DesmosToCSS${param} on second go`);
-                    cachedVal = pair[`DesmosToCSS${param}`]
+                chrome.storage.local.get(`DesmosToCSS${param}`, (pair) => {
+                    document.getElementById(param).value = parseFloat(pair[`DesmosToCSS${param}`]);
                 });
-                // document.getElementById(param).value = parseFloat(cachedVal);
             }
         })
     }
