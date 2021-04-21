@@ -44,9 +44,6 @@ const getPercent = (currVal, minVal, maxVal, numDecimals) => {
     }
 }
 
-
-// ((rawVal[1] - mins[key])/(maxes[key] - mins[key])).toFixed(2)
-
 const getRawVals = (mint, maxt, stept) => {
 
     if (mint > maxt) {
@@ -80,12 +77,12 @@ const getMin = (val1, val2) => {
 }
 
 const makeKeyframe = (percent, x, y) => {
-    const line = `  ${percent}% {left:${x}  bottom:${y}}\n`;
+    const line = `  ${percent}% {left:${x};  bottom:${y};}\n`;
     return line;
 }
 
 const createCSS = (name, proportionateVals) => {
-    const firstLine = `@keframes ${name} {\n`;
+    const firstLine = `@keyframes ${name} {\n`;
     let frames = '';
     const numFrames = proportionateVals['x'].length;
     for (let i = 0; i < numFrames; i++) {
