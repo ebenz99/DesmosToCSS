@@ -1,21 +1,3 @@
-// var nodes = document.evaluate("//div[@id='hello']", document, null, XPathResult.ANY_TYPE, null);
-// alert('testing');
-
-`
-<span style="width:.55em" class="dcg-mq-scaled dcg-mq-bracket-l dcg-mq-paren">
-    <svg preserveAspectRatio="none" viewBox="3 0 106 186">
-        <path d="M85 0 A61 101 0 0 0 85 186 L75 186 A75 101 0 0 1 75 0"></path>
-    </svg>
-</span>
-<span style="margin-left:.55em;margin-right:.55em" class="dcg-mq-bracket-middle dcg-mq-non-leaf" aria-hidden="true">
-    <var aria-hidden="true">t</var>
-</span>
-<span style="width:.55em" class="dcg-mq-scaled dcg-mq-bracket-r dcg-mq-paren">
-    <svg preserveAspectRatio="none" viewBox="3 0 106 186">
-        <path d="M24 0 A61 101 0 0 1 24 186 L34 186 A75 101 0 0 0 34 0"></path>
-    </svg>
-</span>`
-
 // alert(math.evaluate('sqrt(3^2 + 4^2)'))
 const NUM_EQUATIONS = 2;
 const OPEN_PAREN_SVG = '<path d="M85 0 A61 101 0 0 0 85 186 L75 186 A75 101 0 0 1 75 0"></path>';
@@ -119,11 +101,4 @@ equationsDict = equations.reduce((map, equation) => {
     return map;
 }, {});
 
-// alert(Object.keys(equationsDict))
-
-
 chrome.runtime.sendMessage({cmd: "addEquations", equations: JSON.stringify(equationsDict)});
-
-// alert(elements[0].children)
-
-

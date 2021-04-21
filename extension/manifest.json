@@ -10,7 +10,8 @@
      "default_popup": "popup.html"
     },
     "permissions": [
-     "activeTab"
+     "activeTab",
+     "storage"
      ],
     "background": {
         "scripts": ["math.js","background.js"],

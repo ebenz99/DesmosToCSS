@@ -1,36 +1,47 @@
-// document.addEventListener('DOMContentLoaded', function() {
-//     let submitPageButton = document.getElementById('submitParams');
-//     //*[contains(concat( " ", @class, " " ), concat( " ", "dcg-mq-root-block", " " ))]
-//     submitPageButton.addEventListener('click', function() {
-//         // chrome.tabs.getSelected(null, function(tab) {
-//         //     d = document;
-            
-//         //     // var f = d.createElement('form');
-//         //     // f.action = 'http://gtmetrix.com/analyze.html?bm';
-//         //     // f.method = 'post';
-//         //     // var i = d.createElement('input');
-//         //     // i.type = 'hidden';
-//         //     // i.name = 'url';
-//         //     // i.value = tab.url;
-//         //     // f.appendChild(i);
-//         //     // d.body.appendChild(f);
-//         //     // f.submit();
-//         //     alert( getElementByXpath(d,'//nobr') );
-//         // });
-//         alert('test');
-//     }, false);
-//   }, false);
-
 params = ['name', 'mint', 'maxt', 'stept'];
+
+
+if (chrome.storage.local.get('DesmosToCSSVals', (val) => {
+    if (val['DesmosToCSSVals'] == 'true') {
+        params.map((param) => {
+            if (param != 'name') {
+                    let cachedVal;
+                    chrome.storage.local.get(`DesmosToCSS${param}`, (pair) => {
+                    alert(`${pair[`DesmosToCSS${param}`]} and DesmosToCSS${param} on second go`);
+                    cachedVal = pair[`DesmosToCSS${param}`]
+                });
+                // document.getElementById(param).value = parseFloat(cachedVal);
+            }
+        })
+    }
+}));
+
+const createParamDict = (params, prefix) => {
+    if (! prefix) {
+        prefix = ""
+    }
+    return params.reduce((map, param) => {
+        map[prefix + param] = document.getElementById(param).value;
+        return map;
+    }, {});
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     let form = document.getElementById("paramForm");
     form.addEventListener('submit',function(e){
         e.preventDefault();
-        let paramDict = params.reduce((map, param) => {
-            map[param] = document.getElementById(param).value;
-            return map
-        }, {});
+        if ((document.getElementById('mint').value >= document.getElementById('maxt').value)){
+            alert('Error: max t must be greater than min t')
+            return;
+        }
+        if (document.getElementById('stept').value <= 0) {
+            alert('Error: t must be greater than 0')
+            return;
+        }
+        chrome.storage.local.set({'DesmosToCSSVals':'true'});
+        let paramDict = createParamDict(params);
+        let localParamDict = createParamDict(params, "DesmosToCSS");
+        chrome.storage.local.set(localParamDict);
         chrome.runtime.sendMessage({cmd: "addParams", params: JSON.stringify(paramDict)});
     })
 });

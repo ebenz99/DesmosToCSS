@@ -45,18 +45,11 @@ const getPercent = (currVal, minVal, maxVal, numDecimals) => {
 }
 
 const getRawVals = (mint, maxt, stept) => {
-
-    if (mint > maxt) {
-        alert('Error: min t value greater than max t')
-        throw 'Error: min t value greater than max t';   // this should probably be moved to popup logic
-    }
-
     parser.evaluate(equations['x']);
     parser.evaluate(equations['y']);
 
     let vals = {'x': [], 'y':[]}
     let currt = mint;
-    let diff = maxt - mint;
     while (currt <= maxt) {
         let xval = parser.evaluate(`x(${currt})`);
         let yval = parser.evaluate(`y(${currt})`);
@@ -68,10 +61,12 @@ const getRawVals = (mint, maxt, stept) => {
     return vals;
 }
 
+// gets max of two values
 const getMax = (val1, val2) => {
     return val1 > val2 ? val1 : val2;
 }
 
+// gets min of two values
 const getMin = (val1, val2) => {
     return val1 < val2 ? val1 : val2;
 }
@@ -112,21 +107,3 @@ const makeProportionate = (rawVals) => {
     }, {});
     return proportionateVals;
 }
-
-// ((rawVal[1] - mins[key])/(maxes[key] - mins[key])).toFixed(2)
-
-`
-@keyframes floater {
-    0%   {left:100%; top:78.4%;}
-    10%  {left:70.9%; top:100%;}
-    20%  {left:19.9%; top:75.2%;}
-    30%  {left:00.5%; top:23.4%;}
-    40%  {left:20.4%; top:0%;}
-    50%  {left:36.1%; top:22.7%;}
-    60%  {left:19.7%; top:54.4%;}
-    70%  {left:0.4%; top:57.9%;}
-    80%  {left:21%; top:41.8%;}
-    90%  {left:73.8%; top:46.9%;}
-    100%   {left:100%; top:78.4%;}
-  } 
-`
