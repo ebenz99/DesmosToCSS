@@ -31,6 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
             map[param] = document.getElementById(param).value;
             return map
         }, {});
-        alert(JSON.stringify(paramDict));
+        chrome.runtime.sendMessage({cmd: "addParams", params: JSON.stringify(paramDict)});
     })
 });
