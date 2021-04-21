@@ -24,7 +24,7 @@ chrome.runtime.onMessage.addListener(
 const evalMath = (equations) => {;}
 
 const generateResult = (equations, params) => {
-    const name = parseFloat(params['name']);
+    const name = params['name'];
     const mint = parseFloat(params['mint']);
     const maxt = parseFloat(params['maxt']);
     const stept = parseFloat(params['stept']);
