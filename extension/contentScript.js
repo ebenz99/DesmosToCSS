@@ -1,4 +1,3 @@
-// alert(math.evaluate('sqrt(3^2 + 4^2)'))
 const NUM_EQUATIONS = 2;
 const OPEN_PAREN_SVG = '<path d="M85 0 A61 101 0 0 0 85 186 L75 186 A75 101 0 0 1 75 0"></path>';
 const CLOSED_PAREN_SVG = '<path d="M24 0 A61 101 0 0 1 24 186 L34 186 A75 101 0 0 0 34 0"></path>';

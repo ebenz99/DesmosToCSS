@@ -3,12 +3,14 @@ const parser = math.parser()
 
 chrome.runtime.onMessage.addListener(
     function(request, sender) {
+        // sets global equations
         if (request.cmd == 'addEquations'){
             requestEquations = JSON.parse(request.equations);
             Object.keys(requestEquations).map((key) => {
                 equations[key] = requestEquations[key]
             });
         }
+        // adds
         else if (request.cmd == 'addParams') {
             if (!equations['x']) {
                 alert('No equations! Please save and refresh your desmos page then try again.')
@@ -39,7 +41,6 @@ const generateResult = (equations, params) => {
     let proportionateVals = makeProportionate(rawVals);
     let generatedCSS = createCSS(name, proportionateVals);
     return generatedCSS;
-    // alert(generatedCSS);
 }
 
 const getPercent = (currVal, minVal, maxVal, numDecimals) => {
@@ -48,8 +49,8 @@ const getPercent = (currVal, minVal, maxVal, numDecimals) => {
         return parseInt(((currVal - minVal) / (maxVal - minVal)) * 100);
     } 
     else {
-        // more often used for exact page position
-        return (((currVal - minVal) / (maxVal - minVal)) * 100).toFixed(numDecimals);
+        // more often used for exact page position, so subtract 50
+        return ((((currVal - minVal) / (maxVal - minVal)) * 100)).toFixed(numDecimals);
     }
 }
 
@@ -84,13 +85,13 @@ const getMin = (val1, val2) => {
 
 // creates a single keyframe from coords and percentage
 const makeKeyframe = (percent, x, y) => {
-    const line = `&nbsp;&nbsp;&nbsp;${percent}% {left:${x};&nbsp;&nbsp;&nbsp;bottom:${y};}`;
+    const line = `&nbsp;&nbsp;&nbsp;${percent}% {left:${x}%;&nbsp;&nbsp;&nbsp;bottom:${y}%;}`;
     return line;
 }
 
 // builds CSS text from keyframes
 const createCSS = (name, proportionateVals) => {
-    let frames = ['@keyframes ${name} {'];
+    let frames = [`@keyframes ${name} {`];
     const numFrames = proportionateVals['x'].length;
     for (let i = 0; i < numFrames; i++) {
         frames.push(makeKeyframe(proportionateVals['x'][i][0],proportionateVals['x'][i][1],proportionateVals['y'][i][1]));
