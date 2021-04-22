@@ -15,10 +15,13 @@ chrome.runtime.onMessage.addListener(
                 return;
             }
             else {
-                let generatedCSS = generateResult(equations, JSON.parse(request.params));
+                let generatedCSS = generateResult(equations, JSON.parse(request.params)).reduce((prev,curr) => {
+                    prev+=curr + '<br>';
+                    return prev;
+                },"");
                 //url: "about:blank"
                 chrome.tabs.create({url: "https://ebenz99.github.io/DesmosToCSS/index.html"}, ((tab) => {
-                    let jsCode = "document.getElementById('CSS').innerHTML = '<p>" + generatedCSS + "</p>;";
+                    let jsCode = "document.getElementById('CSS').innerHTML = '<p>" + generatedCSS + "</p>';";
                     chrome.tabs.executeScript(tab.id, {code: jsCode}, () => {});
                 }));
             }
@@ -81,20 +84,19 @@ const getMin = (val1, val2) => {
 
 // creates a single keyframe from coords and percentage
 const makeKeyframe = (percent, x, y) => {
-    const line = `  ${percent}% {left:${x};  bottom:${y};}\n`;
+    const line = `&nbsp;&nbsp;&nbsp;${percent}% {left:${x};&nbsp;&nbsp;&nbsp;bottom:${y};}`;
     return line;
 }
 
 // builds CSS text from keyframes
 const createCSS = (name, proportionateVals) => {
-    const firstLine = `@keyframes ${name} {\n`;
-    let frames = '';
+    let frames = ['@keyframes ${name} {'];
     const numFrames = proportionateVals['x'].length;
     for (let i = 0; i < numFrames; i++) {
-        frames += makeKeyframe(proportionateVals['x'][i][0],proportionateVals['x'][i][1],proportionateVals['y'][i][1])
+        frames.push(makeKeyframe(proportionateVals['x'][i][0],proportionateVals['x'][i][1],proportionateVals['y'][i][1]));
     }
-    const lastLine = '}\n';
-    return firstLine + frames + lastLine;
+    frames.push('}');
+    return frames;
 }
 
 const getMinMax = (rawVals, minMaxFunc) => {
