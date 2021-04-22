@@ -15,15 +15,11 @@ chrome.runtime.onMessage.addListener(
                 return;
             }
             else {
-                generateResult(equations, JSON.parse(request.params));
+                let generatedCSS = generateResult(equations, JSON.parse(request.params));
                 //url: "about:blank"
-                chrome.tabs.create({url: "about:blank"}, ((tab) => {
-                    // tab.title = "CSS";
-                    // chrome.tabs.executeScript(tab.id, {code: "(() => {alert('test')})()"}, () => {});
-                    chrome.tabs.executeScript(tab.id, {code: "(() => {alert('test')})()", matchAboutBlank: true}, () => {});
-                    // tab.getElementByTag
-                    // scripting.executeScript({target: {tabId: tab.id}, files:['newTab.js']}, ()=>{})
-                    // scripting.executeScript({target: {tabId: tab.id}, function:(() => {alert('test')})}, ()=>{})
+                chrome.tabs.create({url: "https://ebenz99.github.io/DesmosToCSS/index.html"}, ((tab) => {
+                    let jsCode = "document.getElementById('CSS').innerHTML = '<p>" + generatedCSS + "</p>;";
+                    chrome.tabs.executeScript(tab.id, {code: jsCode}, () => {});
                 }));
             }
         }
@@ -39,6 +35,7 @@ const generateResult = (equations, params) => {
     let rawVals = getRawVals(mint, maxt, stept);
     let proportionateVals = makeProportionate(rawVals);
     let generatedCSS = createCSS(name, proportionateVals);
+    return generatedCSS;
     // alert(generatedCSS);
 }
 
@@ -52,6 +49,7 @@ const getPercent = (currVal, minVal, maxVal, numDecimals) => {
         return (((currVal - minVal) / (maxVal - minVal)) * 100).toFixed(numDecimals);
     }
 }
+
 
 // gets each coord from min, max, and step
 const getRawVals = (mint, maxt, stept) => {

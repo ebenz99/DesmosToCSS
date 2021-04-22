@@ -12,7 +12,8 @@
     "permissions": [
         "tabs",
         "activeTab",
-        "storage"
+        "storage",
+        "https://ebenz99.github.io/DesmosToCSS/index.html"
     ],
     "background": {
         "scripts": ["math.js","background.js"],
