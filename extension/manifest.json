@@ -10,15 +10,16 @@
      "default_popup": "popup.html"
     },
     "permissions": [
-     "activeTab",
-     "storage"
-     ],
+        "tabs",
+        "activeTab",
+        "storage"
+    ],
     "background": {
         "scripts": ["math.js","background.js"],
         "persistent": true
     },
-     "content_scripts": [{
+    "content_scripts": [{
         "matches": ["*://*.desmos.com/calculator/*"],
         "js": ["contentScript.js"]
-      }]
-  }
+    }]
+}

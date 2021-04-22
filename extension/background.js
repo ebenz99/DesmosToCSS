@@ -16,12 +16,19 @@ chrome.runtime.onMessage.addListener(
             }
             else {
                 generateResult(equations, JSON.parse(request.params));
+                //url: "about:blank"
+                chrome.tabs.create({url: "about:blank"}, ((tab) => {
+                    // tab.title = "CSS";
+                    // chrome.tabs.executeScript(tab.id, {code: "(() => {alert('test')})()"}, () => {});
+                    chrome.tabs.executeScript(tab.id, {code: "(() => {alert('test')})()", matchAboutBlank: true}, () => {});
+                    // tab.getElementByTag
+                    // scripting.executeScript({target: {tabId: tab.id}, files:['newTab.js']}, ()=>{})
+                    // scripting.executeScript({target: {tabId: tab.id}, function:(() => {alert('test')})}, ()=>{})
+                }));
             }
         }
     }
 );
-
-const evalMath = (equations) => {;}
 
 const generateResult = (equations, params) => {
     const name = params['name'];
@@ -32,18 +39,21 @@ const generateResult = (equations, params) => {
     let rawVals = getRawVals(mint, maxt, stept);
     let proportionateVals = makeProportionate(rawVals);
     let generatedCSS = createCSS(name, proportionateVals);
-    alert(generatedCSS);
+    // alert(generatedCSS);
 }
 
 const getPercent = (currVal, minVal, maxVal, numDecimals) => {
     if (numDecimals == 0) {
-        return parseInt(((currVal - minVal) / maxVal - minVal) * 100);
+        // calculates a raw percentage
+        return parseInt(((currVal - minVal) / (maxVal - minVal)) * 100);
     } 
     else {
+        // more often used for exact page position
         return (((currVal - minVal) / (maxVal - minVal)) * 100).toFixed(numDecimals);
     }
 }
 
+// gets each coord from min, max, and step
 const getRawVals = (mint, maxt, stept) => {
     parser.evaluate(equations['x']);
     parser.evaluate(equations['y']);
@@ -71,11 +81,13 @@ const getMin = (val1, val2) => {
     return val1 < val2 ? val1 : val2;
 }
 
+// creates a single keyframe from coords and percentage
 const makeKeyframe = (percent, x, y) => {
     const line = `  ${percent}% {left:${x};  bottom:${y};}\n`;
     return line;
 }
 
+// builds CSS text from keyframes
 const createCSS = (name, proportionateVals) => {
     const firstLine = `@keyframes ${name} {\n`;
     let frames = '';
@@ -88,7 +100,7 @@ const createCSS = (name, proportionateVals) => {
 }
 
 const getMinMax = (rawVals, minMaxFunc) => {
-    // long-winded and drawn out way of getting maxes of each set
+    // long-winded and drawn out way of getting either mins or maxes of each set
     let extreme = Object.keys(rawVals).reduce((map, key) => {
         map[key] = rawVals[key].map((item) => (item[1])).reduce((currMax, curr) => {
             return minMaxFunc(currMax, curr)
@@ -98,6 +110,7 @@ const getMinMax = (rawVals, minMaxFunc) => {
     return extreme;
 }
 
+// standardizes values to minimum
 const makeProportionate = (rawVals) => {
     let maxes = getMinMax(rawVals, getMax);
     let mins = getMinMax(rawVals, getMin);
