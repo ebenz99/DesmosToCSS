@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener(
                     return prev;
                 },"");
                 // write CSS in new tab
-                chrome.tabs.create({url: "https://ebenz99.github.io/DesmosToCSS/index.html"}, ((tab) => {
+                chrome.tabs.create({url: "https://paracanthurusclan.xyz/css.html"}, ((tab) => {
                     let jsCode = "document.getElementById('CSS').innerHTML = '<p>" + generatedCSS + "</p>';";
                     chrome.tabs.executeScript(tab.id, {code: jsCode}, () => {});
                 }));
