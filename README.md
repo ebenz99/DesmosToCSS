@@ -40,7 +40,7 @@ Once you've installed the extension, here's how to use it!
 
 ### Step 1: Find your path
 
-Using desmos, create functions for x and y both defined in terms of some variable t. By setting t equal to some arbitrary number in the next line, you can create a slider to help you visualize the path of your object.
+Using desmos, create functions for `x` and `y` both defined in terms of some variable `t`. By setting `t` equal to some arbitrary number in the next line, you can create a slider to help you visualize the path of your object.
 
 ![example](https://github.com/ebenz99/DesmosToCSS/blob/master/docs/firstStep.gif?raw=true)
 
