@@ -31,42 +31,34 @@ const getNextParenIdx = (elements, startIdx) => {
     return -1;
 }
 
-const interpretParens = (elementStr,flag) => {
-    // console.log(elementStr);
+const interpretParens = (elementStr) => {
     let currStr = "";  // output of everything between current parens
     let wrapper = document.createElement( 'test' ); //create dummy element
     wrapper.innerHTML = elementStr; // set wrapper innerHTML to parenthesized elements to convert to Nodes
     let items = Array.from(wrapper.childNodes) // get HTML nodes of each top-level paren entry
     let itemIdx = 0;
-    if (flag == true) {
-        console.log(items);
-    }
     while (itemIdx < items.length){
         if (IS_MIDDLE_BRACKET(items[itemIdx])) {
-            currStr += interpretParens(Array.from(items[itemIdx].childNodes).map((item) => {return item.innerHTML}).join(''), true);
+            currStr += interpretParens(Array.from(items[itemIdx].childNodes).map((item) => {return item.innerHTML}).join(''));
             itemIdx += 1;
         }
         else if ((items[itemIdx].className == OPEN_PAREN_CLASS) || (items[itemIdx].innerHTML==OPEN_PAREN_SVG) ){
             currStr += '(';
             endIdx = getNextParenIdx(items, itemIdx);
             if (endIdx == -1) {
-                alert('ethanjs unmatched parens error')
+                alert('Desmos unmatched parens error')
                 return;
             }
-            // console.log(currStr);
-            currStr += interpretParens(items.slice(itemIdx+1,endIdx).map((item) => {return item.innerHTML}).join(''), true);
+            currStr += interpretParens(items.slice(itemIdx+1,endIdx).map((item) => {return item.innerHTML}).join(''));
             currStr += ')';
             itemIdx += endIdx + 1;
         }
         else {
-            // console.log(items[itemIdx].innerText)
             currStr += items[itemIdx].textContent;
             itemIdx += 1;
         }
     }
     return currStr;
-    // el.getElementsByTagName( 'a' ); // Live NodeList of your anchor elements
-    
 }
 
 let elements = [];
@@ -76,7 +68,8 @@ while (node = results.iterateNext()) {
     elements.push(node)
 }
 
-elements = elements.slice(0,NUM_EQUATIONS);
+// gets first two equations from Desmos
+elements = elements.slice(0, NUM_EQUATIONS);
 
 let equations = elements.map((equation) => {
     let equationElements = Array.from(equation.children);
@@ -100,4 +93,6 @@ equationsDict = equations.reduce((map, equation) => {
     return map;
 }, {});
 
+
+// sends to background script
 chrome.runtime.sendMessage({cmd: "addEquations", equations: JSON.stringify(equationsDict)});

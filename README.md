@@ -48,7 +48,7 @@ Using desmos, create functions for x and y both defined in terms of some variabl
 
 Remove your `t` slider and change your equations to be functions of `t`, i.e. `x(t)` and `y(t)`. Also, parenthesize where possible!
 
-![example](https://github.com/ebenz99/DesmosToCSS/blob/master/docs/functions?raw=true)
+![example](https://github.com/ebenz99/DesmosToCSS/blob/master/docs/functions.png?raw=true)
 
 ### Step 2: Save and Refresh
 

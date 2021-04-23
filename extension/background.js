@@ -10,18 +10,18 @@ chrome.runtime.onMessage.addListener(
                 equations[key] = requestEquations[key]
             });
         }
-        // adds
+        // adds equations to global
         else if (request.cmd == 'addParams') {
             if (!equations['x']) {
                 alert('No equations! Please save and refresh your desmos page then try again.')
                 return;
             }
             else {
-                let generatedCSS = generateResult(equations, JSON.parse(request.params)).reduce((prev,curr) => {
+                let generatedCSS = generateResult(JSON.parse(request.params)).reduce((prev,curr) => {
                     prev+=curr + '<br>';
                     return prev;
                 },"");
-                //url: "about:blank"
+                // write CSS in new tab
                 chrome.tabs.create({url: "https://ebenz99.github.io/DesmosToCSS/index.html"}, ((tab) => {
                     let jsCode = "document.getElementById('CSS').innerHTML = '<p>" + generatedCSS + "</p>';";
                     chrome.tabs.executeScript(tab.id, {code: jsCode}, () => {});
@@ -31,7 +31,8 @@ chrome.runtime.onMessage.addListener(
     }
 );
 
-const generateResult = (equations, params) => {
+// driver for generating the CSS
+const generateResult = (params) => {
     const name = params['name'];
     const mint = parseFloat(params['mint']);
     const maxt = parseFloat(params['maxt']);
@@ -49,7 +50,7 @@ const getPercent = (currVal, minVal, maxVal, numDecimals) => {
         return parseInt(((currVal - minVal) / (maxVal - minVal)) * 100);
     } 
     else {
-        // more often used for exact page position, so subtract 50
+        // more often used for exact page position
         return ((((currVal - minVal) / (maxVal - minVal)) * 100)).toFixed(numDecimals);
     }
 }
@@ -60,6 +61,7 @@ const getRawVals = (mint, maxt, stept) => {
     parser.evaluate(equations['x']);
     parser.evaluate(equations['y']);
 
+    // finds value of parametric function at each step
     let vals = {'x': [], 'y':[]}
     let currt = mint;
     while (currt <= maxt) {
