@@ -1,6 +1,6 @@
 # DesmosToCSS
 
-Animating custom keyframe translations in CSS can be tedious. This tries to make it easier.
+Animating custom keyframe translations in CSS can be tedious. With DesmosToCSS, it will still be tedious, but hopefully far less so.
 
 ## Use Case
 
@@ -36,9 +36,23 @@ Some long patterns can lead to even more CSS than that! Now, instead of writing 
 
 ## Process
 
+Once you've installed the extension, here's how to use it!
+
 ### Step 1: Find your path
 
 Using desmos, create functions for x and y both defined in terms of some variable t. By setting t equal to some arbitrary number in the next line, you can create a slider to help you visualize the path of your object.
 
 ![example](https://github.com/ebenz99/DesmosToCSS/blob/master/docs/firstStep.gif?raw=true)
+
+### Step 2: Convert to function notation
+
+Remove your `t` slider and change your equations to be functions of `t`, i.e. `x(t)` and `y(t)`. Also, parenthesize where possible!
+
+![example](https://github.com/ebenz99/DesmosToCSS/blob/master/docs/functions?raw=true)
+
+### Step 2: Save and Refresh
+
+To change the function "on-deck" in the extension, you must refresh the desmos tab. Make sure to save beforehand!
+
+**You're now all set to use the extension and generate CSS paths to your heart's content!**
 
