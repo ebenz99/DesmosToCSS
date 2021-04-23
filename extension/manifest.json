@@ -4,6 +4,19 @@
     "name": "DesmosToCSS",
     "description": "Converts parametrically defined equations in Desmos to CSS animations",
     "version": "0.0.0.1",
+
+    "app": {
+        "urls": [
+            "https://ebenz99.github.io/DesmosToCSS/extension/"
+        ],
+        "launch": {
+            "web_url": "https://ebenz99.github.io/DesmosToCSS/extension/"
+        }
+    },
+
+    "icons": {
+        "128": "icon_128.png"
+    },
   
     "browser_action": {
      "default_icon": "logo.png",
