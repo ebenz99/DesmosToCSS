@@ -17,13 +17,10 @@
      "default_popup": "popup.html"
     },
     "permissions": [
-        "tabs",
-        "activeTab",
-        "storage",
-        "https://paracanthurusclan.xyz/css.html"
+        "storage"
     ],
     "background": {
-        "scripts": ["thirdparty/jquery-1.10.2.js","thirdparty/jquery-ui.js","thirdparty/math.js","background.js"],
+        "scripts": ["thirdparty/math.js","background.js"],
         "persistent": true
     },
     "content_scripts": [{

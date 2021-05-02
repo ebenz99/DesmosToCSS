@@ -18,15 +18,11 @@ chrome.runtime.onMessage.addListener(
             }
             else {
                 let generatedCSS = generateResult(JSON.parse(request.params)).reduce((prev,curr) => {
-                    prev+=curr + '<br>';
+                    prev+=curr + '\n';
                     return prev;
                 },"");
 
-                // write CSS in new tab
-                chrome.tabs.create({url: "https://paracanthurusclan.xyz/css.html"}, ((tab) => {
-                    let jsCode = "document.getElementById('CSS').innerHTML = '<p>" + generatedCSS + "</p>';";
-                    chrome.tabs.executeScript(tab.id, {code: jsCode}, () => {});
-                }));
+                alert(generatedCSS)
             }
         }
     }
@@ -88,7 +84,7 @@ const getMin = (val1, val2) => {
 
 // creates a single keyframe from coords and percentage
 const makeKeyframe = (percent, x, y) => {
-    const line = `&nbsp;&nbsp;&nbsp;${percent}% {left:${x}%;&nbsp;&nbsp;&nbsp;bottom:${y}%;}`;
+    const line = `\t${percent}% {left:${x}%;\tbottom:${y}%;}`;
     return line;
 }
 
