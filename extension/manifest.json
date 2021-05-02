@@ -6,14 +6,14 @@
     "version": "0.0.0.1",
 
     "icons": {
-        "16": "favicon.ico",
-        "48": "logo_48.png",
-        "96": "logo_96.png",
-        "128": "icon_128.png"
+        "16": "logos/favicon.ico",
+        "48": "logos/logo_48.png",
+        "96": "logos/logo_96.png",
+        "128": "logos/logo_128.png"
     },
   
     "browser_action": {
-     "default_icon": "logo.png",
+     "default_icon": "logos/logo.png",
      "default_popup": "popup.html"
     },
     "permissions": [
@@ -23,7 +23,7 @@
         "https://paracanthurusclan.xyz/css.html"
     ],
     "background": {
-        "scripts": ["math.js","background.js"],
+        "scripts": ["thirdparty/jquery-1.10.2.js","thirdparty/jquery-ui.js","thirdparty/math.js","background.js"],
         "persistent": true
     },
     "content_scripts": [{

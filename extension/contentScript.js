@@ -96,3 +96,4 @@ equationsDict = equations.reduce((map, equation) => {
 
 // sends to background script
 chrome.runtime.sendMessage({cmd: "addEquations", equations: JSON.stringify(equationsDict)});
+

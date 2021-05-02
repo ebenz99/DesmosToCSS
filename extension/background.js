@@ -21,6 +21,7 @@ chrome.runtime.onMessage.addListener(
                     prev+=curr + '<br>';
                     return prev;
                 },"");
+
                 // write CSS in new tab
                 chrome.tabs.create({url: "https://paracanthurusclan.xyz/css.html"}, ((tab) => {
                     let jsCode = "document.getElementById('CSS').innerHTML = '<p>" + generatedCSS + "</p>';";
