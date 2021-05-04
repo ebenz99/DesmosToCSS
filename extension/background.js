@@ -18,11 +18,11 @@ chrome.runtime.onMessage.addListener(
             }
             else {
                 let generatedCSS = generateResult(JSON.parse(request.params)).reduce((prev,curr) => {
-                    prev+=curr + '\n';
+                    prev+=curr + '<br>';
                     return prev;
                 },"");
 
-                alert(generatedCSS)
+                sendToPopup(generatedCSS);
             }
         }
     }
@@ -84,7 +84,7 @@ const getMin = (val1, val2) => {
 
 // creates a single keyframe from coords and percentage
 const makeKeyframe = (percent, x, y) => {
-    const line = `\t${percent}% {left:${x}%;\tbottom:${y}%;}`;
+    const line = `&nbsp;&nbsp;&nbsp;${percent}% {left:${x}%;&nbsp;&nbsp;&nbsp;bottom:${y}%;}`;
     return line;
 }
 
@@ -119,4 +119,12 @@ const makeProportionate = (rawVals) => {
         return map;
     }, {});
     return proportionateVals;
+}
+
+
+const sendToPopup = (keyframes) => {
+    chrome.runtime.sendMessage({
+        cmd: "displayKeyframes", 
+        params: JSON.stringify({"keyframes": keyframes})
+    });
 }

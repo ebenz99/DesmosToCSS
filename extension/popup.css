@@ -1,0 +1,41 @@
+body {
+    text-align: center;
+}
+
+.extensionContainer {
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+.submit{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.formArea {
+    width: 30%;
+    text-align: left;
+}
+
+.gtext {
+    text-align: center;
+}
+
+.CSSArea {
+    width: 60%;
+    height: 100%;
+    text-align: left;
+}
+
+.CSSText {
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    background-color: green;
+    margin: 15px;
+    text-align: left;
+}

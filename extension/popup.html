@@ -3,9 +3,13 @@
   <head>
     <title>Desmos to CSS</title>
     <script src="popup.js"></script>
+    <link rel="stylesheet" href="popup.css">
   </head>
   <body>
     <h1>Desmos to CSS</h1>
+    <div class="extensionContainer">
+      <div class="formArea">
+        <h2 class="gtext">CSS Inputs:</h2>
         <form id="paramForm" autocomplete="off">
             <label for="name">Animation Name</label><br>
             <input type="text" required id="name" name="name"><br><br>
@@ -15,7 +19,18 @@
             <input type="number" required id="maxt" name="maxt" min="-6.28" max="12.56" value="1" step=".01"><br><br>
             <label for="stept">Step t</label><br>
             <input type="number" required id="stept" name="stept" min="0" max="3.14" value="0.2" step=".001"><br><br>
-            <input type="submit" value="Submit">
+            <div class="submit">
+              <input type="submit" value="Submit">
+            </div>
         </form> 
+      </div>
+
+      <div class="CSSArea" id="test">
+        <h2 class="gtext">Generated CSS:</h2>
+        <div id="CSSText">
+        </div>
+      </div>
+    
+    </div>
   </body>
 </html>

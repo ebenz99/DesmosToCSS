@@ -42,3 +42,12 @@ document.addEventListener('DOMContentLoaded', function () {
         chrome.runtime.sendMessage({cmd: "addParams", params: JSON.stringify(paramDict)});
     })
 });
+
+chrome.runtime.onMessage.addListener(
+    function(request) {
+        if (request.cmd === "displayKeyframes") {
+            let text = JSON.parse(request.params)['keyframes'];
+            document.getElementById('CSSText').innerHTML=text;
+        }
+    }
+);
