@@ -46,7 +46,7 @@ Using desmos, create functions for `x` and `y` both defined in terms of some var
 
 ### Step 2: Convert to function notation
 
-Remove your `t` slider and change your equations to be functions of `t`, i.e. `x(t)` and `y(t)`. Also, parenthesize where possible!
+Remove your `t` slider and change your equations to be functions of `t`, i.e. `x(t)` and `y(t)`.  Also, parenthesize where possible!
 
 ![example](https://github.com/ebenz99/DesmosToCSS/blob/master/docs/functions.png?raw=true)
 
@@ -54,5 +54,5 @@ Remove your `t` slider and change your equations to be functions of `t`, i.e. `x
 
 To change the function "on-deck" in the extension, you must refresh the desmos tab. Make sure to hit the save button beforehand!
 
-**You're now all set to use the extension and generate CSS paths to your heart's content!**
+**You're now all set to open up the extension and generate CSS paths to your heart's content!**
 
