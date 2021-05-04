@@ -36,7 +36,7 @@ Some long patterns can lead to even more CSS than that! Now, instead of writing 
 
 ## Process
 
-Once you've installed the extension, here's how to use it!
+The extension is live in the chrome web store [here](https://chrome.google.com/webstore/detail/desmostocss/pnopgfmgkgpldjgkehholjfmepeiemnn/). Once you've installed the extension, here's how to use it!
 
 ### Step 1: Find your path
 
@@ -52,7 +52,7 @@ Remove your `t` slider and change your equations to be functions of `t`, i.e. `x
 
 ### Step 2: Save and Refresh
 
-To change the function "on-deck" in the extension, you must refresh the desmos tab. Make sure to save beforehand!
+To change the function "on-deck" in the extension, you must refresh the desmos tab. Make sure to hit the save button beforehand!
 
 **You're now all set to use the extension and generate CSS paths to your heart's content!**
 
