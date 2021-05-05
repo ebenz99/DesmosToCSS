@@ -9,7 +9,6 @@ chrome.runtime.onMessage.addListener(
             Object.keys(requestEquations).map((key) => {
                 equations[key] = requestEquations[key]
             });
-            alert(equations['x'])
         }
         // adds equations to global
         else if (request.cmd == 'addParams') {
