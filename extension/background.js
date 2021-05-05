@@ -55,6 +55,7 @@ const getPercent = (currVal, minVal, maxVal, numDecimals) => {
 
 // gets each coord from min, max, and step
 const getRawVals = (mint, maxt, stept) => {
+    // alert(equations['x']);
     parser.evaluate(equations['x']);
     parser.evaluate(equations['y']);
 

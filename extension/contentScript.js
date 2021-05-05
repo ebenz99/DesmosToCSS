@@ -1,6 +1,8 @@
 const NUM_EQUATIONS = 2;
 const OPEN_PAREN_SVG = '<path d="M85 0 A61 101 0 0 0 85 186 L75 186 A75 101 0 0 1 75 0"></path>';
 const CLOSED_PAREN_SVG = '<path d="M24 0 A61 101 0 0 1 24 186 L34 186 A75 101 0 0 0 34 0"></path>';
+const MULTIPLY_SIGN = "·"
+const MINUS_SIGN = "−"
 
 const OPEN_PAREN_CLASS = 'dcg-mq-scaled dcg-mq-bracket-l dcg-mq-paren';
 const CLOSED_PAREN_CLASS = 'dcg-mq-scaled dcg-mq-bracket-r dcg-mq-paren';
@@ -54,7 +56,8 @@ const interpretParens = (elementStr) => {
             itemIdx += endIdx + 1;
         }
         else {
-            currStr += items[itemIdx].textContent;
+            let currItem = items[itemIdx].textContent.replace(MULTIPLY_SIGN, " * ");
+            currStr += currItem;
             itemIdx += 1;
         }
     }
@@ -81,10 +84,10 @@ let equations = elements.map((equation) => {
             return '('
         }
         else {
-            return equationItem.innerHTML
+            return equationItem.innerHTML;
         }
     })
-    return equationList.filter(x => x!="&nbsp;").join('').trim();
+    return equationList.filter(x => x!="&nbsp;").join('').trim().replace(MULTIPLY_SIGN, " * ").replace(MINUS_SIGN, "-");
 });
 
 
